@@ -11,7 +11,8 @@ RUN apt-get update
 RUN apt-get install git build-essential -y
 
 # Compiling a specific version of John the Ripper
-COPY task-deps/john-src /app/john
+COPY task-deps/john-src.tar.gz /tmp/john-src.tar.gz
+RUN mkdir -p /app/john && tar -xzf /tmp/john-src.tar.gz -C /app/john && rm /tmp/john-src.tar.gz
 WORKDIR /app/john
 WORKDIR /app/john/src
 RUN ./configure --without-openssl && make
