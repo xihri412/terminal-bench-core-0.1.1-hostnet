@@ -2,7 +2,13 @@
 #!/bin/bash
 
 # Install required packages
-pip install transformers torch flask requests -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install \
+    --extra-index-url https://download.pytorch.org/whl/cpu \
+    torch==2.7.0 \
+    "transformers<5" \
+    flask==3.1.1 \
+    requests==2.32.5 \
+    -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # Create directory for model cache
 mkdir -p model_cache

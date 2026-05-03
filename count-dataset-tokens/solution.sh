@@ -2,7 +2,11 @@
 #!/bin/bash
 
 # Install required packages
-pip install datasets transformers jinja2 -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install \
+    "datasets==2.21.0" \
+    "transformers<5" \
+    "jinja2==3.1.6" \
+    -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # Write the script to count the number of tokens
 cat << 'EOF' > count_tokens.py

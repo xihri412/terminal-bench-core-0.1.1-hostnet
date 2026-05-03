@@ -15,4 +15,11 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y wget
 
-RUN pip install mteb==1.36.8
+RUN pip install \
+    --extra-index-url https://download.pytorch.org/whl/cpu \
+    mteb==1.36.8 \
+    torch==2.7.0 \
+    torchvision==0.22.0 \
+    "transformers<5" \
+    datasets==2.21.0 \
+    numpy==1.26.4
