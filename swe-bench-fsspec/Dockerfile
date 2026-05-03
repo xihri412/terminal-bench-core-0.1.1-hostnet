@@ -16,6 +16,11 @@
 
 # FROM ghcr.io/laude-institute/t-bench/ubuntu-24-04:latest
 FROM python:3.9-slim-bookworm
+RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
+        sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g; s|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources; \
+    elif [ -f /etc/apt/sources.list ]; then \
+        sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g; s|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g; s|http://archive.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g; s|http://security.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' /etc/apt/sources.list; \
+    fi
 
 # View the list of available base images here:
 # https://github.com/laude-institute/terminal-bench/packages
@@ -39,12 +44,9 @@ FROM python:3.9-slim-bookworm
 
 RUN apt-get update && apt-get install -y git tmux asciinema 
 
-RUN git clone https://github.com/fsspec/filesystem_spec.git /app/filesystem_spec
-
-RUN cd /app/filesystem_spec && \
-    git reset --hard b842cf4cc7e4e22caa3110157cec9b4959582993 &&\
-    rm -rf .git/logs/ && \
-    git gc --prune=now && \
-    git remote remove origin
+COPY task-deps/filesystem_spec-b842cf4c.tar.gz /tmp/filesystem_spec.tar.gz
+RUN mkdir -p /app/filesystem_spec && \
+    tar -xzf /tmp/filesystem_spec.tar.gz --strip-components=1 -C /app/filesystem_spec && \
+    rm /tmp/filesystem_spec.tar.gz
 
 WORKDIR /app/filesystem_spec

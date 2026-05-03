@@ -16,6 +16,11 @@
 
 # FROM ghcr.io/laude-institute/t-bench/ubuntu-24-04:latest
 FROM python:3.9-slim-bookworm
+RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
+        sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g; s|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources; \
+    elif [ -f /etc/apt/sources.list ]; then \
+        sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g; s|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g; s|http://archive.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g; s|http://security.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' /etc/apt/sources.list; \
+    fi
 
 # View the list of available base images here:
 # https://github.com/laude-institute/terminal-bench/packages
@@ -38,13 +43,9 @@ FROM python:3.9-slim-bookworm
 
 RUN apt-get update && apt-get install -y git tmux asciinema 
 
-RUN git clone https://github.com/georgkrause/langcodes.git /app/langcodes
-
-RUN cd /app/langcodes && \
-    git reset --hard a603607937ce3f3a6a6ddefdb219f41bb7fc46a4 &&\
-    rm -rf .git/logs/ && \
-    git gc --prune=now && \
-    git remote remove origin
+COPY task-deps/langcodes-a6036079.tar.gz /tmp/langcodes.tar.gz
+RUN mkdir -p /app/langcodes && \
+    tar -xzf /tmp/langcodes.tar.gz --strip-components=1 -C /app/langcodes && \
+    rm /tmp/langcodes.tar.gz
 
 WORKDIR /app/langcodes
-

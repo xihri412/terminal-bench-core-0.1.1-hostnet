@@ -2,7 +2,7 @@
 #!/bin/bash
 mkdir -p /app/data
 
-pip install jsonschema
+pip install jsonschema -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 cat > /app/generate_organization.py << 'EOF'
 #!/usr/bin/env python3

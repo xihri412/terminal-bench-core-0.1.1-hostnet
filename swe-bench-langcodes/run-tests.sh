@@ -33,6 +33,6 @@ source tests-venv/bin/activate
 
 patch --fuzz=5 -p1 -i /app/test_patch.diff
 
-python -m pip install -e .[test] --verbose
+python -m pip install -e .[test] --verbose -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 pytest -rA -v langcodes/tests/test_language.py

@@ -1,0 +1,4 @@
+- Email: mchlmerrill@gmail.com
+- [📚 Google Scholar](https://scholar.google.com/citations?hl=en&user=UtBcznsAAAAJ)
+- [🐦 Twitter](https://twitter.com/Mike_A_Merrill)
+- [🎓 CV](./resources/Mike_Merrill_CV.pdf)

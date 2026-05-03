@@ -8,7 +8,7 @@
   block: true
   append_enter: true
 
-- command: "git clone https://github.com/facebookresearch/fastText.git"
+- command: "cp -a /app/task-deps/fastText /app/fastText"
   block: true
   append_enter: true
 

@@ -4,12 +4,12 @@
   block: false
   append_enter: true
 
-- command: git clone https://github.com/wjn1996/UPET && cd UPET && git checkout 4701c3c62441077cc44a6553bf6ae909d99b8351
+- command: mkdir -p /app/UPET && tar -xzf /app/task-deps/upet-4701c3c6.tar.gz --strip-components=1 -C /app/UPET
   min_timeout_sec: 0.5
   block: true
   append_enter: true
 
-- command: pip install datasets==1.16.1 tqdm==4.64.1 transformers==4.27.4 seqeval==1.2.2  accelerate==0.20.3
+- command: pip install datasets==1.16.1 tqdm==4.64.1 transformers==4.27.4 seqeval==1.2.2  accelerate==0.20.3 -i https://pypi.tuna.tsinghua.edu.cn/simple
   min_timeout_sec: 0.5
   block: false
   append_enter: true

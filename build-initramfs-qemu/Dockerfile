@@ -15,6 +15,11 @@
 # a new task.
 
 FROM ghcr.io/laude-institute/t-bench/ubuntu-24-04:latest
+RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
+        sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g; s|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources; \
+    elif [ -f /etc/apt/sources.list ]; then \
+        sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g; s|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g; s|http://archive.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g; s|http://security.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' /etc/apt/sources.list; \
+    fi
 # FROM ghcr.io/laude-institute/t-bench/python-3-13:latest
 
 # View the list of available base images here:
@@ -38,9 +43,10 @@ FROM ghcr.io/laude-institute/t-bench/ubuntu-24-04:latest
 
 RUN apt-get update -y
 RUN apt-get install -y build-essential libncurses-dev bison flex libssl-dev libelf-dev qemu-system bc cpio wget expect
+COPY task-deps/ /app/task-deps/
 
 # Download and extract the kernel source
-RUN wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.9.tar.xz
+RUN cp /app/task-deps/linux-6.9.tar.xz linux-6.9.tar.xz
 RUN tar xf linux-6.9.tar.xz
 RUN cd linux-6.9
 
@@ -61,4 +67,3 @@ RUN cd linux-6.9 && make olddefconfig
 
 # Build the kernel
 RUN cd linux-6.9 && make -j$(nproc)
-

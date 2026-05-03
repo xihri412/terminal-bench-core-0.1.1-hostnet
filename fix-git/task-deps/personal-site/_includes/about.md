@@ -1,0 +1,5 @@
+I am a Member of Technical Staff at Anthropic, where I work on building new evals. 
+<br><br>
+Previously I was a postdoc at Stanford Computer Science with [Ludwig Schmidt](https://people.csail.mit.edu/ludwigs/), where I co-created [Terminal-Bench](tbench.ai). Terminal-Bench has been featured on model cards from [virtually](https://qwen.ai/blog?id=qwen3-coder-next) [every](https://blog.google/products-and-platforms/products/gemini/gemini-3/#gemini-3) [frontier](https://openai.com/index/gpt-5-1-codex-max/) [lab](https://www.anthropic.com/news/claude-opus-4-5). 
+<br><br>
+I did my PhD at the [Paul G. Allen School of Computer Science & Engineering](https://www.cs.washington.edu/) at The University of Washington, where I was advised by [Tim Althoff](http://www.timalthoff.com/). I was a Student Researcher at [Google Research](https://research.google/), and an ML Research Intern at [Apple Health AI](https://machinelearning.apple.com/work-with-us). 

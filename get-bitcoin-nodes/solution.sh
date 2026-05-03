@@ -9,7 +9,7 @@ echo "Setting up Bitcoin Data Service..."
 
 # Step 1: Install required dependencies
 echo "Installing required dependencies..."
-pip install flask requests python-bitcoinlib
+pip install flask requests python-bitcoinlib -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # Step 2: Create the service files
 echo "Creating service files..."

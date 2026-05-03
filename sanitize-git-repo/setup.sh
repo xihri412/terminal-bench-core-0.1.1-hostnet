@@ -1,4 +1,4 @@
 git config --global user.email "test@example.com"
 git config --global user.name "Test User"
-git clone https://github.com/jeffreywpli/test-secret-removal.git dclm
+cp -a /app/task-deps/dclm dclm
 cd dclm

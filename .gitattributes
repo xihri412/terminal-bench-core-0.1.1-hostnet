@@ -1,0 +1,5 @@
+build-tcc-qemu/task-deps/linux-6.9.tar.xz filter=lfs diff=lfs merge=lfs -text
+build-linux-kernel-qemu/task-deps/linux-6.9.tar.xz filter=lfs diff=lfs merge=lfs -text
+incompatible-python-fasttext.base_with_hint/task-deps/model.bin filter=lfs diff=lfs merge=lfs -text
+incompatible-python-fasttext/task-deps/model.bin filter=lfs diff=lfs merge=lfs -text
+build-initramfs-qemu/task-deps/linux-6.9.tar.xz filter=lfs diff=lfs merge=lfs -text

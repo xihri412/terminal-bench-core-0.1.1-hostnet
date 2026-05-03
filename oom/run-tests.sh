@@ -1,5 +1,5 @@
 #!/bin/bash
 
-pip install pytest
+pip install pytest -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 pytest $TEST_DIR/test_output.py -rA

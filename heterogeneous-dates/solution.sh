@@ -10,7 +10,7 @@ cat daily_temp_sf_low.csv
 
 # Step 2: Install required dependencies
 echo "Installing required dependencies..."
-pip install pandas
+pip install pandas -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # Step 3: Create script to process data files
 cat << 'EOF' > process_data.py
