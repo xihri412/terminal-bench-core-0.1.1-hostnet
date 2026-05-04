@@ -17,4 +17,16 @@ WORKDIR /app
 
 COPY requirements.txt /app/
 COPY task-deps/ /app/task-deps/
+RUN mkdir -p /tmp/upetpatch \
+    && tar -xzf /app/task-deps/upet-4701c3c6.tar.gz -C /tmp/upetpatch \
+    && printf '%s\n' \
+        'datasets==2.18.0' \
+        'numpy==1.26.4' \
+        'tqdm==4.67.1' \
+        'transformers==4.27.4' \
+        'seqeval==1.2.2' \
+        'accelerate==0.20.3' \
+        > /tmp/upetpatch/UPET-4701c3c62441077cc44a6553bf6ae909d99b8351/requirements.txt \
+    && tar -czf /app/task-deps/upet-4701c3c6.tar.gz -C /tmp/upetpatch UPET-4701c3c62441077cc44a6553bf6ae909d99b8351 \
+    && rm -rf /tmp/upetpatch
 RUN pip install -r requirements.txt
