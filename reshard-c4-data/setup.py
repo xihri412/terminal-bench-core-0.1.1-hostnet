@@ -8,8 +8,12 @@ output_dir = "/app/c4_sample/"
 num_splits = 10000
 
 dataset = load_dataset(
-    "allenai/c4",
-    data_files={"train": ["en/c4-train.00000-of-01024.json.gz"]},
+    "json",
+    data_files={
+        "train": [
+            "https://hf-mirror.com/datasets/allenai/c4/resolve/main/en/c4-train.00000-of-01024.json.gz"
+        ]
+    },
     split="train",
 )
 
