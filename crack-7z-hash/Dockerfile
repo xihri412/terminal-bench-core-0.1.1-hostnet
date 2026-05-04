@@ -8,7 +8,13 @@ RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
 
 # Install dependencies
 RUN apt-get update
-RUN apt-get install git build-essential -y
+RUN apt-get install -y \
+    git \
+    build-essential \
+    pkg-config \
+    libgmp-dev \
+    zlib1g-dev \
+    libbz2-dev
 
 # Compiling a specific version of John the Ripper
 COPY task-deps/john-src.tar.gz /tmp/john-src.tar.gz
