@@ -21,9 +21,18 @@ RUN apt-get update && apt-get install -y wget
 
 RUN pip install --timeout 600 --retries 20 \
     -i https://mirrors.aliyun.com/pypi/simple/ \
-    numpy==1.26.4
+    numpy==1.26.4 \
+    filelock \
+    fsspec \
+    jinja2 \
+    networkx \
+    pillow \
+    setuptools \
+    sympy \
+    typing-extensions
 
 RUN pip install --timeout 600 --retries 20 \
+    --no-deps \
     --index-url https://download.pytorch.org/whl/cpu \
     torch==2.7.0 \
     torchvision==0.22.0
