@@ -6,6 +6,10 @@ RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
         sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g; s|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g; s|http://archive.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g; s|http://security.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' /etc/apt/sources.list; \
     fi
 
-RUN apt-get update && apt-get install -y curl python3-pip
+RUN apt-get update && apt-get install -y curl python3-pip \
+    && python3 -m pip install --break-system-packages --timeout 600 --retries 20 \
+        -i https://pypi.tuna.tsinghua.edu.cn/simple \
+        pandas pyarrow pytest \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY task-deps/data.csv ./ 
