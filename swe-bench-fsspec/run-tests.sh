@@ -29,6 +29,6 @@ source tests-venv/bin/activate
 
 patch --fuzz=5 -p1 -i /app/test_patch.diff
 
-python -m pip install -e .[test] --verbose -i https://pypi.tuna.tsinghua.edu.cn/simple
+python -m pip install --timeout 600 --retries 20 -e .[test] --verbose -i https://mirrors.aliyun.com/pypi/simple/
 
 pytest -rA -v fsspec/implementations/tests/test_dirfs.py

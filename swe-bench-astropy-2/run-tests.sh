@@ -44,7 +44,7 @@ patch --fuzz=5 -p1 -i /app/test_patch.diff
 
 sed -i 's/requires = \["setuptools",/requires = \["setuptools==68.0.0",/' pyproject.toml
 
-pip install numpy==1.23.4 -i https://pypi.tuna.tsinghua.edu.cn/simple
-python -m pip install -e .[test] --verbose -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install --timeout 600 --retries 20 numpy==1.23.4 -i https://mirrors.aliyun.com/pypi/simple/
+python -m pip install --timeout 600 --retries 20 -e .[test] --verbose -i https://mirrors.aliyun.com/pypi/simple/
 
 pytest -rA -v astropy/io/ascii/tests/test_qdp.py
