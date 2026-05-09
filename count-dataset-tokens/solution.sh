@@ -3,11 +3,11 @@
 export HF_ENDPOINT=https://hf-mirror.com
 
 # Install required packages
-pip install --timeout 600 --retries 20 \
+pip install \
     "datasets==2.21.0" \
     "transformers<5" \
     "jinja2==3.1.6" \
-    -i https://mirrors.aliyun.com/pypi/simple/
+    -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # Write the script to count the number of tokens
 cat << 'EOF' > count_tokens.py

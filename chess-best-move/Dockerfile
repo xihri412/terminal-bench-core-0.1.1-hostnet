@@ -44,7 +44,7 @@ RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
 RUN apt update -y
 RUN apt-get clean && apt-get update -y
 RUN apt install -y python3-pip 
-RUN pip3 install --timeout 600 --retries 20 -i https://mirrors.aliyun.com/pypi/simple/ pillow --break-system-packages
+RUN pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple pillow --break-system-packages
 
 COPY make.py /app
 RUN python3 make.py
