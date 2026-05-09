@@ -27,7 +27,7 @@ RUN chmod +x /app/maze_game.sh
 COPY ./tests /app/tests
 
 # Install dependencies
-RUN pip install --no-cache-dir pytest
+RUN pip install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple pytest
 
 # Set default command to bash so the agent can run the maze game script
 CMD ["bash"] 

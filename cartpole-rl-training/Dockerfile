@@ -3,7 +3,7 @@ FROM ghcr.io/laude-institute/t-bench/python-3-13:latest
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 RUN pip install torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu
-RUN pip install numpy gymnasium
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy gymnasium
 
 
 WORKDIR /app

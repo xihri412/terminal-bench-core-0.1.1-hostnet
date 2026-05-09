@@ -15,5 +15,5 @@ RUN wget -P /app/data https://hf-mirror.com/datasets/Yelp/yelp_review_full/resol
 
 COPY reformat_data.py /app/
 
-RUN pip install pandas pyarrow
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas pyarrow
 RUN python reformat_data.py && rm reformat_data.py

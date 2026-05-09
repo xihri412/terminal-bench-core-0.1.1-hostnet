@@ -14,6 +14,18 @@ ENV PATH="/opt/conda/bin:${PATH}"
 # # Initialize conda in bash
 RUN ln -sf /opt/conda/bin/conda /usr/local/bin/conda
 
+RUN printf '%s\n' \
+    'channels:' \
+    '  - defaults' \
+    'show_channel_urls: true' \
+    'default_channels:' \
+    '  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main' \
+    '  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r' \
+    '  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2' \
+    'custom_channels:' \
+    '  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud' \
+    > /opt/conda/.condarc
+
 RUN apt-get update && apt-get install -y tmux asciinema
 
 # Optional: Create a simple activation script that can be sourced in your entrypoint

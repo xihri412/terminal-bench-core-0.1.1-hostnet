@@ -8,7 +8,7 @@ RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 RUN apt-get update && apt-get install build-essential -y && apt-get install wget -y
-RUN pip install fasttext
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple fasttext
 
 # TODO: We may need to anonymize this later on
 COPY task-deps/model.bin /app/model.bin
