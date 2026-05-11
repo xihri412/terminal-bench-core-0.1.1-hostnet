@@ -1,0 +1,19 @@
+services:
+  client:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    image: ${T_BENCH_TASK_DOCKER_CLIENT_IMAGE_NAME}
+    container_name: ${T_BENCH_TASK_DOCKER_CLIENT_CONTAINER_NAME}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: [ "sh", "-c", "sleep infinity" ]
+    environment:
+      - TEST_DIR=${T_BENCH_TEST_DIR}
+    volumes:
+      - ${TBENCH_WHEELHOUSE:-/srv/tbench-cache/wheelhouse}:/opt/wheelhouse:ro
+      - ${TBENCH_HF_CACHE:-/srv/tbench-cache/hf}:/opt/hf-cache:ro
+      - ${TBENCH_ARTIFACTS:-/srv/tbench-cache/artifacts}:/opt/tbench-artifacts:ro
+      - ${T_BENCH_TASK_LOGS_PATH}:${T_BENCH_CONTAINER_LOGS_PATH}
+    tmpfs:
+      - /root:size=100M,mode=755
