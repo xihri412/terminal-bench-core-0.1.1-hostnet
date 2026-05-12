@@ -20,4 +20,4 @@ COPY departments.csv /app/data/
 COPY employees.csv /app/data/
 COPY projects.csv /app/data/
 COPY schema.json /app/
-RUN pip install jsonschema
+RUN pip install jsonschema pytest

@@ -1,5 +1,4 @@
 #!/bin/bash
 
-pip install pytest
-
-pytest $TEST_DIR/test_output.py -rA
+source $TEST_DIR/setup-uv-pytest.sh
+bash $TEST_DIR/run-uv-pytest.sh

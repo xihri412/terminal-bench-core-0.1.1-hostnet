@@ -1,7 +1,4 @@
 #!/bin/bash
 
-# Install test dependencies
-pip install pytest requests 
-
-# Run the tests
-pytest $TEST_DIR/test_outputs.py -v -rA
+source $TEST_DIR/setup-uv-pytest.sh
+bash $TEST_DIR/run-uv-pytest.sh

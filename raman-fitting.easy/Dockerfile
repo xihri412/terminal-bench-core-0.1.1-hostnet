@@ -16,6 +16,7 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
 RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
+RUN pip install pytest
 
 # Copy over the task dependencies
 WORKDIR /app

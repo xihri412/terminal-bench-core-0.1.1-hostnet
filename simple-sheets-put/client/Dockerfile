@@ -21,6 +21,7 @@ RUN apt-get update && \
     apt-get install -y curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+RUN pip install pytest==8.3.0 requests
 
 # Copy client files into the image
 COPY . /app

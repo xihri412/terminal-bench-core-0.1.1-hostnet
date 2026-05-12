@@ -16,6 +16,10 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
 RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
+RUN apt-get update && apt-get install -y ffmpeg libsm6 libxext6 \
+    && rm -rf /var/lib/apt/lists/*
+RUN pip install torch==2.7.0 torchvision==0.22.0 --index-url https://download.pytorch.org/whl/cpu
+RUN pip install numpy opencv-python pytest
 
 # Copy over the task dependencies
 WORKDIR /app

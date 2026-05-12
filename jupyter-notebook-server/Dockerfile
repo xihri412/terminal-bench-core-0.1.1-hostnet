@@ -20,5 +20,6 @@ RUN if command -v git >/dev/null 2>&1; then \
 RUN apt-get update && apt-get install -y \
     tmux curl asciinema \
     && rm -rf /var/lib/apt/lists/*
+RUN pip install pytest requests
 
 WORKDIR /app

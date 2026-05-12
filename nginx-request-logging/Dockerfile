@@ -17,6 +17,6 @@ RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
 
-RUN pip install requests
+RUN pip install requests pytest
 
 RUN apt-get update && apt-get install -y curl

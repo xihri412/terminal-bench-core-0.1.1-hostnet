@@ -18,7 +18,7 @@ RUN if command -v git >/dev/null 2>&1; then \
     fi
 
 RUN pip install torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu
-RUN pip install numpy gymnasium
+RUN pip install numpy gymnasium pytest
 
 
 WORKDIR /app
