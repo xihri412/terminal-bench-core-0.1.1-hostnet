@@ -19,6 +19,8 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 # Install required packages
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pytest \
     qemu-system-x86 \
     qemu-utils \
     wget \
@@ -37,4 +39,3 @@ RUN qemu-img create -f qcow2 /app/alpine-disk.qcow2 32G
 
 RUN apt update -y
 RUN apt install -y telnet netcat expect tmux asciinema
-

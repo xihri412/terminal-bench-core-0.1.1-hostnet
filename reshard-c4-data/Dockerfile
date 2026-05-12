@@ -19,6 +19,6 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 COPY setup.py ./
 
-RUN pip install asciinema datasets
+RUN pip install asciinema datasets pytest tqdm
 RUN python setup.py
 RUN rm setup.py

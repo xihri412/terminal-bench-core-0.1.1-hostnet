@@ -1,3 +1,3 @@
 #! /bin/bash
 
-uv run pytest $TEST_DIR/test_outputs.py -rA
+/opt/train-fasttext-tests/bin/python -m pytest "$TEST_DIR/test_outputs.py" -rA

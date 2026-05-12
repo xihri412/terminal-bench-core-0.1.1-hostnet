@@ -19,6 +19,8 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 # Install required packages
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pytest \
     qemu-system-x86 \
     qemu-utils \
     wget \

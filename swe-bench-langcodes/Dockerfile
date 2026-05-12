@@ -52,7 +52,7 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 # bash scripts_bash/launch-interactive-container.sh -t <YOUR_TASK_ID>
 
-RUN apt-get update && apt-get install -y git tmux asciinema 
+RUN apt-get update && apt-get install -y git tmux asciinema gcc
 
 RUN if [ -d /opt/tbench-artifacts/git-mirrors/langcodes ]; then git clone /opt/tbench-artifacts/git-mirrors/langcodes /app/langcodes; else git clone https://github.com/georgkrause/langcodes.git /app/langcodes; fi
 
@@ -63,4 +63,6 @@ RUN cd /app/langcodes && \
     git remote remove origin
 
 WORKDIR /app/langcodes
-
+RUN pip install pytest && \
+    python -m venv /opt/tests-venv && \
+    /opt/tests-venv/bin/python -m pip install -e .[test] --verbose

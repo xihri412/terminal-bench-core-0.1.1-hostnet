@@ -53,7 +53,7 @@ RUN if command -v git >/dev/null 2>&1; then \
 # bash scripts_bash/launch-interactive-container.sh -t <YOUR_TASK_ID>
 
 
-RUN apt-get update && apt-get install -y git tmux asciinema 
+RUN apt-get update && apt-get install -y git tmux asciinema gcc
 
 RUN if [ -d /opt/tbench-artifacts/git-mirrors/filesystem_spec ]; then git clone /opt/tbench-artifacts/git-mirrors/filesystem_spec /app/filesystem_spec; else git clone https://github.com/fsspec/filesystem_spec.git /app/filesystem_spec; fi
 
@@ -64,3 +64,6 @@ RUN cd /app/filesystem_spec && \
     git remote remove origin
 
 WORKDIR /app/filesystem_spec
+RUN pip install pytest && \
+    python -m venv /opt/tests-venv && \
+    /opt/tests-venv/bin/python -m pip install -e .[test] --verbose

@@ -18,7 +18,7 @@ RUN if command -v git >/dev/null 2>&1; then \
     fi
 
 RUN apt-get update && apt-get install build-essential -y && apt-get install wget -y
-RUN pip install fasttext
+RUN pip install fasttext pytest
 
 # TODO: We may need to anonymize this later on
 RUN if [ -f /opt/tbench-artifacts/fasttext-placeholder/model.bin ]; then cp /opt/tbench-artifacts/fasttext-placeholder/model.bin model.bin; else wget https://huggingface.co/jeffreywpli/fasttext-placeholder/resolve/main/model.bin?download=true -O model.bin; fi

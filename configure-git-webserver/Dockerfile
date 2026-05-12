@@ -30,6 +30,8 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
 RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
+RUN apt-get update && apt-get install -y python3-pytest \
+    && rm -rf /var/lib/apt/lists/*
 
 # If you'd like to step into the container and run commands to help you develop the task, you can use the following command:
 # bash scripts_bash/launch-interactive-container.sh -t <YOUR_TASK_ID>

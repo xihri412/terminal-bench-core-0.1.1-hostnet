@@ -30,6 +30,8 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
 RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
+RUN apt-get update && apt-get install -y python3-pytest \
+    && rm -rf /var/lib/apt/lists/*
 # Other common base images (we only support ubuntu and debian for now):
 # FROM python:3.13-slim-bookworm (minimal python image)
 

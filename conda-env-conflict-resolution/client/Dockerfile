@@ -26,6 +26,7 @@ ENV PATH="/opt/conda/bin:${PATH}"
 RUN ln -sf /opt/conda/bin/conda /usr/local/bin/conda
 
 RUN apt-get update && apt-get install -y tmux asciinema
+RUN pip install pytest
 
 # Optional: Create a simple activation script that can be sourced in your entrypoint
 RUN echo '. /opt/conda/etc/profile.d/conda.sh && conda activate base' > /activate-conda.sh

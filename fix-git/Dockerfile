@@ -18,6 +18,7 @@ RUN if command -v git >/dev/null 2>&1; then \
     fi
 
 RUN apt-get update && apt-get install -y git
+RUN pip install pytest botocore boto3
 
 COPY setup.sh ./
 

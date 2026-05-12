@@ -31,10 +31,11 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
 RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
+RUN apt-get update && apt-get install -y python3-pytest \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update -y
 RUN apt-get install -y curl gcc --fix-missing
 
 RUN if [ -f /opt/tbench-artifacts/gpt2/vocab.bpe ]; then cp /opt/tbench-artifacts/gpt2/vocab.bpe vocab.bpe; else curl https://openaipublic.blob.core.windows.net/gpt-2/models/124M/vocab.bpe > vocab.bpe; fi
 RUN if [ -f /opt/tbench-artifacts/gpt2/model.ckpt.data-00000-of-00001 ]; then cp /opt/tbench-artifacts/gpt2/model.ckpt.data-00000-of-00001 gpt2-124M.ckpt; else curl https://openaipublic.blob.core.windows.net/gpt-2/models/124M/model.ckpt.data-00000-of-00001 > gpt2-124M.ckpt; fi
-

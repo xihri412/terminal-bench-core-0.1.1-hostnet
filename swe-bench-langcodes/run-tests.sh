@@ -26,13 +26,5 @@ index 00000000..e96af933
 +    assert hash(en1) != hash(en_us)
 EOF
 
-apt-get update && apt-get install -y gcc
-
-python -m venv tests-venv
-source tests-venv/bin/activate
-
 patch --fuzz=5 -p1 -i /app/test_patch.diff
-
-python -m pip install -e .[test] --verbose
-
-pytest -rA -v langcodes/tests/test_language.py
+PATH=/opt/tests-venv/bin:$PATH pytest -rA -v langcodes/tests/test_language.py

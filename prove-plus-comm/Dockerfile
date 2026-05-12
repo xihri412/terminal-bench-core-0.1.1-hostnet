@@ -16,6 +16,8 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
 RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
+RUN apt-get update && apt-get install -y python3-pytest \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Coq
 RUN apt-get update && \

@@ -54,7 +54,7 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 
 
-RUN apt-get update && apt-get install -y git tmux asciinema 
+RUN apt-get update && apt-get install -y git tmux asciinema gcc
 
 RUN if [ -d /opt/tbench-artifacts/git-mirrors/astropy ]; then git clone /opt/tbench-artifacts/git-mirrors/astropy /app/astropy; else git clone https://github.com/astropy/astropy.git /app/astropy; fi
 
@@ -65,4 +65,8 @@ RUN cd /app/astropy && \
     git remote remove origin
 
 WORKDIR /app/astropy
-
+RUN pip install pytest && \
+    sed -i 's/requires = \["setuptools",/requires = \["setuptools==68.0.0",/' pyproject.toml && \
+    python -m venv /opt/tests-venv && \
+    /opt/tests-venv/bin/pip install numpy==1.23.4 && \
+    /opt/tests-venv/bin/python -m pip install -e .[test] --verbose

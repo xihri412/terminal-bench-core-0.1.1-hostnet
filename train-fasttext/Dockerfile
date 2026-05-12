@@ -24,5 +24,9 @@ RUN if [ -f /opt/tbench-artifacts/yelp_review_full/train-00000-of-00001.parquet 
 
 COPY reformat_data.py /app/
 
-RUN pip install pandas pyarrow
+RUN pip install pandas pyarrow pytest uv
 RUN python reformat_data.py && rm reformat_data.py
+RUN uv python install 3.11 && \
+    uv venv --python 3.11 /opt/train-fasttext-tests && \
+    uv pip install --python /opt/train-fasttext-tests/bin/python \
+      pytest scikit-learn fasttext-wheel numpy==1.24.0

@@ -35,16 +35,5 @@ diff --git a/astropy/io/ascii/tests/test_qdp.py b/astropy/io/ascii/tests/test_qd
      path2 = str(tmp_path / "test2.qdp")
 EOF
 
-apt-get update && apt-get install -y gcc
-
-python -m venv tests-venv
-source tests-venv/bin/activate
-
 patch --fuzz=5 -p1 -i /app/test_patch.diff
-
-sed -i 's/requires = \["setuptools",/requires = \["setuptools==68.0.0",/' pyproject.toml
-
-pip install numpy==1.23.4
-python -m pip install -e .[test] --verbose
-
-pytest -rA -v astropy/io/ascii/tests/test_qdp.py
+PATH=/opt/tests-venv/bin:$PATH pytest -rA -v astropy/io/ascii/tests/test_qdp.py

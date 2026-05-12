@@ -31,6 +31,8 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
 RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
+RUN apt-get update && apt-get install -y python3-pytest \
+    && rm -rf /var/lib/apt/lists/*
 # FROM ghcr.io/laude-institute/t-bench/python-3-13:latest
 
 # View the list of available base images here:
@@ -77,4 +79,3 @@ RUN cd linux-6.9 && make olddefconfig
 
 # Build the kernel
 RUN cd linux-6.9 && make -j$(nproc)
-
