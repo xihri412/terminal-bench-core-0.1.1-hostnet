@@ -29,7 +29,8 @@ RUN chmod +x generate_report.sh
 
 RUN chmod 311 collect_data.sh
 
-RUN apt-get update && apt-get install -y dos2unix
+RUN apt-get update && apt-get install -y dos2unix python3-pytest \
+    && rm -rf /var/lib/apt/lists/*
 RUN unix2dos process_data.sh
 
 RUN sed -i 's|#!/bin/bash|#!/bin/nonexistent|' generate_report.sh
