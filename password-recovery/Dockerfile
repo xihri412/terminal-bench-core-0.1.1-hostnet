@@ -63,6 +63,7 @@ RUN apt-get update -y \
     binutils \
     zip \
     unzip \
+    python3-pytest \
     && rm -rf /var/lib/apt/lists/*
 
 COPY setup.sh /app/

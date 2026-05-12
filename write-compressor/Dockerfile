@@ -53,7 +53,8 @@ RUN if command -v git >/dev/null 2>&1; then \
 # bash scripts_bash/launch-interactive-container.sh -t <YOUR_TASK_ID>
 
 RUN apt update -y
-RUN apt install -y gcc rustc bc
+RUN apt install -y gcc rustc bc python3-pytest \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY decomp.c /app
 RUN gcc -O3 decomp.c -o /app/decomp

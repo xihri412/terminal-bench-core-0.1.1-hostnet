@@ -57,7 +57,7 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 # Install gfortran and make for Fortran compilation
 RUN apt-get update && \
-    apt-get install -y gfortran make && \
+    apt-get install -y gfortran make python3-pytest && \
     rm -rf /var/lib/apt/lists/*
 
 # Create directory for task source files and copy them from the build context

@@ -20,6 +20,7 @@ RUN if command -v git >/dev/null 2>&1; then \
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
+    python3-pytest \
     python3-venv \
     curl \
     tar \

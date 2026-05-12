@@ -55,7 +55,7 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 # Install dependencies for gpg (encryption) and shred (secure deletion)
 RUN apt-get update && \
-    apt-get install -y gnupg coreutils && \
+    apt-get install -y gnupg coreutils python3-pytest && \
     rm -rf /var/lib/apt/lists/*
 
 # Create initial service files and data that the agent needs to decommission

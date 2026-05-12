@@ -32,5 +32,5 @@ RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
 
-RUN apt update -y && apt install -y gcc rustc
-
+RUN apt update -y && apt install -y gcc rustc python3-pytest \
+    && rm -rf /var/lib/apt/lists/*

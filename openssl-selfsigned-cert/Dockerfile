@@ -19,4 +19,5 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 RUN apt-get update && apt-get install -y \
     openssl \
+    python3-pytest \
     && rm -rf /var/lib/apt/lists/*
