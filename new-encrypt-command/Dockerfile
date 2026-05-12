@@ -17,8 +17,9 @@ RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
 
-RUN apt-get update && apt-get -y install man-db python3-pytest \
+RUN apt-get update && apt-get -y install man-db \
     && rm -rf /var/lib/apt/lists/*
+RUN pip install pytest
 
 COPY rencrypt.py sample1.txt sample2.txt rencrypt.1 ./
 

@@ -18,8 +18,9 @@ RUN if command -v git >/dev/null 2>&1; then \
     fi
 
 RUN apt-get update && apt-get install -y \
-    git vim procps python3-pytest \
+    git vim procps \
     && rm -rf /var/lib/apt/lists/*
+RUN pip install pytest
 
 COPY setup.sh /app/
 RUN chmod +x /app/setup.sh && /app/setup.sh
