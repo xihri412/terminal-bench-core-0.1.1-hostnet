@@ -1,17 +1,23 @@
 import json
 import math
 import os
-
-from datasets import load_dataset  # type: ignore
+import gzip
 
 output_dir = "/app/c4_sample/"
+input_file = "/opt/tbench-artifacts/c4/en/c4-train.00000-of-01024.json.gz"
 num_splits = 10000
 
-dataset = load_dataset(
-    "allenai/c4",
-    data_files={"train": ["en/c4-train.00000-of-01024.json.gz"]},
-    split="train",
-)
+if not os.path.isfile(input_file):
+    raise FileNotFoundError(
+        "Missing artifact: c4/en/c4-train.00000-of-01024.json.gz"
+    )
+
+dataset = []
+with gzip.open(input_file, "rt", encoding="utf-8") as f:
+    for line in f:
+        item = json.loads(line)
+        item.pop("timestamp", None)
+        dataset.append(item)
 
 
 os.makedirs(output_dir, exist_ok=True)
@@ -28,7 +34,7 @@ for i in range(num_splits):
         break
 
     # Get subset of data
-    subset = dataset.select(range(start_idx, end_idx))
+    subset = dataset[start_idx:end_idx]
 
     # Save as JSONL file
     output_file = os.path.join(output_dir, f"c4-mini-{i:05d}-of-{num_splits:05d}.jsonl")

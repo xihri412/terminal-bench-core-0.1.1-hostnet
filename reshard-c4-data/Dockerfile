@@ -41,6 +41,6 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 COPY setup.py ./
 
-RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install asciinema datasets pytest tqdm
-RUN python setup.py
+RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install asciinema pytest tqdm
+RUN --mount=from=tbench_artifacts,src=/,target=/opt/tbench-artifacts,ro python setup.py
 RUN rm setup.py
