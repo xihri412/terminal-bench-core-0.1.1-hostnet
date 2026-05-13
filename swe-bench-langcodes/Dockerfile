@@ -81,6 +81,7 @@ RUN mkdir -p /app/langcodes && \
     rm -f /tmp/langcodes.tar.gz
 
 WORKDIR /app/langcodes
+ENV SETUPTOOLS_SCM_PRETEND_VERSION_FOR_LANGCODES=0.0.0
 RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install pytest && \
     python -m venv /opt/tests-venv && \
     /opt/tests-venv/bin/python -m pip install -e .[test] --verbose

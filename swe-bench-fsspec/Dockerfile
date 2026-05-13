@@ -82,6 +82,7 @@ RUN mkdir -p /app/filesystem_spec && \
     rm -f /tmp/filesystem_spec.tar.gz
 
 WORKDIR /app/filesystem_spec
+ENV SETUPTOOLS_SCM_PRETEND_VERSION=0.0.0
 RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install pytest && \
     python -m venv /opt/tests-venv && \
     /opt/tests-venv/bin/python -m pip install -e .[test] --verbose

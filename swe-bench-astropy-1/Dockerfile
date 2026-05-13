@@ -83,6 +83,7 @@ RUN mkdir -p /app/astropy && \
     rm -f /tmp/astropy.tar.gz
 
 WORKDIR /app/astropy
+ENV SETUPTOOLS_SCM_PRETEND_VERSION_FOR_ASTROPY=0.0.0
 RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install pytest && \
     sed -i 's/requires = \["setuptools",/requires = \["setuptools==68.0.0",/' pyproject.toml && \
     python -m venv /opt/tests-venv && \
