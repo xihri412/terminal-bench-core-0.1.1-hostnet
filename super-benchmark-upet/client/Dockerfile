@@ -47,5 +47,6 @@ RUN apt-get install -y \
 WORKDIR /app
 
 COPY requirements.txt /app/
-RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install -r requirements.txt
+RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro \
+    pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
 RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install pytest numpy

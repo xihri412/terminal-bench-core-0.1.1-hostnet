@@ -39,7 +39,9 @@ RUN if command -v git >/dev/null 2>&1; then \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
 
-RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install transformers torch pytest
+RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro \
+    pip install --extra-index-url https://download.pytorch.org/whl/cpu torch==2.7.0+cpu
+RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install transformers pytest
 
 COPY task-deps/entrypoint.sh /entrypoint.sh
 
