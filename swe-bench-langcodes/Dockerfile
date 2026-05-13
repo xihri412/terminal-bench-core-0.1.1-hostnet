@@ -42,6 +42,7 @@ ENV PIP_FIND_LINKS=/opt/wheelhouse \
     UV_FIND_LINKS=/opt/wheelhouse \
     UV_DEFAULT_INDEX=https://pypi.tuna.tsinghua.edu.cn/simple \
     HF_HOME=/opt/hf-cache \
+    HF_ENDPOINT=https://hf-mirror.com \
     TRANSFORMERS_CACHE=/opt/hf-cache/transformers \
     HF_DATASETS_CACHE=/opt/hf-cache/datasets \
     NO_PROXY=localhost,127.0.0.1,api,server,client,postgres,node1,node2,node3
@@ -49,6 +50,7 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
       echo "Acquire::http::Proxy \"$TBENCH_APT_PROXY\";" > /etc/apt/apt.conf.d/01tbench-proxy; \
     fi
 RUN if command -v git >/dev/null 2>&1; then \
+      git config --system http.version HTTP/1.1; \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
 
@@ -73,15 +75,12 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 RUN apt-get update && apt-get install -y git tmux asciinema gcc
 
-RUN if [ -d /opt/tbench-artifacts/git-mirrors/langcodes ]; then git clone /opt/tbench-artifacts/git-mirrors/langcodes /app/langcodes; else git clone https://github.com/georgkrause/langcodes.git /app/langcodes; fi
-
-RUN cd /app/langcodes && \
-    git reset --hard a603607937ce3f3a6a6ddefdb219f41bb7fc46a4 &&\
-    rm -rf .git/logs/ && \
-    git gc --prune=now && \
-    git remote remove origin
+COPY task-deps/langcodes-a6036079.tar.gz /tmp/langcodes.tar.gz
+RUN mkdir -p /app/langcodes && \
+    tar -xzf /tmp/langcodes.tar.gz -C /app/langcodes --strip-components=1 && \
+    rm -f /tmp/langcodes.tar.gz
 
 WORKDIR /app/langcodes
-RUN pip install pytest && \
+RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install pytest && \
     python -m venv /opt/tests-venv && \
     /opt/tests-venv/bin/python -m pip install -e .[test] --verbose

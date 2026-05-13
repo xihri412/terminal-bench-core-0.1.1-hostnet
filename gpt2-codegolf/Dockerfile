@@ -41,6 +41,7 @@ ENV PIP_FIND_LINKS=/opt/wheelhouse \
     UV_FIND_LINKS=/opt/wheelhouse \
     UV_DEFAULT_INDEX=https://pypi.tuna.tsinghua.edu.cn/simple \
     HF_HOME=/opt/hf-cache \
+    HF_ENDPOINT=https://hf-mirror.com \
     TRANSFORMERS_CACHE=/opt/hf-cache/transformers \
     HF_DATASETS_CACHE=/opt/hf-cache/datasets \
     NO_PROXY=localhost,127.0.0.1,api,server,client,postgres,node1,node2,node3
@@ -48,6 +49,7 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
       echo "Acquire::http::Proxy \"$TBENCH_APT_PROXY\";" > /etc/apt/apt.conf.d/01tbench-proxy; \
     fi
 RUN if command -v git >/dev/null 2>&1; then \
+      git config --system http.version HTTP/1.1; \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
 RUN apt-get update && apt-get install -y python3-pytest \
@@ -56,5 +58,5 @@ RUN apt-get update && apt-get install -y python3-pytest \
 RUN apt-get update -y
 RUN apt-get install -y curl gcc --fix-missing
 
-RUN if [ -f /opt/tbench-artifacts/gpt2/vocab.bpe ]; then cp /opt/tbench-artifacts/gpt2/vocab.bpe vocab.bpe; else curl https://openaipublic.blob.core.windows.net/gpt-2/models/124M/vocab.bpe > vocab.bpe; fi
-RUN if [ -f /opt/tbench-artifacts/gpt2/model.ckpt.data-00000-of-00001 ]; then cp /opt/tbench-artifacts/gpt2/model.ckpt.data-00000-of-00001 gpt2-124M.ckpt; else curl https://openaipublic.blob.core.windows.net/gpt-2/models/124M/model.ckpt.data-00000-of-00001 > gpt2-124M.ckpt; fi
+RUN --mount=from=tbench_artifacts,src=/,target=/opt/tbench-artifacts,ro if [ -f /opt/tbench-artifacts/gpt2/vocab.bpe ]; then cp /opt/tbench-artifacts/gpt2/vocab.bpe vocab.bpe; else echo "Missing artifact: gpt2/vocab.bpe" >&2; exit 1; fi
+RUN --mount=from=tbench_artifacts,src=/,target=/opt/tbench-artifacts,ro if [ -f /opt/tbench-artifacts/gpt2/model.ckpt.data-00000-of-00001 ]; then cp /opt/tbench-artifacts/gpt2/model.ckpt.data-00000-of-00001 gpt2-124M.ckpt; else echo "Missing artifact: gpt2/model.ckpt.data-00000-of-00001" >&2; exit 1; fi

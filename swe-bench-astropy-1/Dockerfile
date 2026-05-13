@@ -42,6 +42,7 @@ ENV PIP_FIND_LINKS=/opt/wheelhouse \
     UV_FIND_LINKS=/opt/wheelhouse \
     UV_DEFAULT_INDEX=https://pypi.tuna.tsinghua.edu.cn/simple \
     HF_HOME=/opt/hf-cache \
+    HF_ENDPOINT=https://hf-mirror.com \
     TRANSFORMERS_CACHE=/opt/hf-cache/transformers \
     HF_DATASETS_CACHE=/opt/hf-cache/datasets \
     NO_PROXY=localhost,127.0.0.1,api,server,client,postgres,node1,node2,node3
@@ -49,6 +50,7 @@ RUN if [ -n "$TBENCH_APT_PROXY" ]; then \
       echo "Acquire::http::Proxy \"$TBENCH_APT_PROXY\";" > /etc/apt/apt.conf.d/01tbench-proxy; \
     fi
 RUN if command -v git >/dev/null 2>&1; then \
+      git config --system http.version HTTP/1.1; \
       git config --system url."https://hf-mirror.com/".insteadOf "https://huggingface.co/"; \
     fi
 
@@ -75,16 +77,13 @@ RUN if command -v git >/dev/null 2>&1; then \
 
 RUN apt-get update && apt-get install -y git tmux asciinema gcc
 
-RUN if [ -d /opt/tbench-artifacts/git-mirrors/astropy ]; then git clone /opt/tbench-artifacts/git-mirrors/astropy /app/astropy; else git clone https://github.com/astropy/astropy.git /app/astropy; fi
-
-RUN cd /app/astropy && \
-    git reset --hard d16bfe05a744909de4b27f5875fe0d4ed41ce607 &&\
-    rm -rf .git/logs/ && \
-    git gc --prune=now && \
-    git remote remove origin
+COPY task-deps/astropy-d16bfe05.tar.gz /tmp/astropy.tar.gz
+RUN mkdir -p /app/astropy && \
+    tar -xzf /tmp/astropy.tar.gz -C /app/astropy --strip-components=1 && \
+    rm -f /tmp/astropy.tar.gz
 
 WORKDIR /app/astropy
-RUN pip install pytest && \
+RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install pytest && \
     sed -i 's/requires = \["setuptools",/requires = \["setuptools==68.0.0",/' pyproject.toml && \
     python -m venv /opt/tests-venv && \
     /opt/tests-venv/bin/pip install numpy==1.23.4 && \

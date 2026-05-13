@@ -3,6 +3,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        TBENCH_APT_PROXY: ${TBENCH_APT_PROXY:-}
+        TBENCH_APT_MIRROR: ${TBENCH_APT_MIRROR:-}
+      additional_contexts:
+        tbench_artifacts: ${TBENCH_ARTIFACTS:-/srv/tbench-cache/artifacts}
+        tbench_wheelhouse: ${TBENCH_WHEELHOUSE:-/srv/tbench-cache/wheelhouse}
     image: ${T_BENCH_TASK_DOCKER_CLIENT_IMAGE_NAME}
     container_name: ${T_BENCH_TASK_DOCKER_CLIENT_CONTAINER_NAME}
     extra_hosts:
