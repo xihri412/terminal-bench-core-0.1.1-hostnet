@@ -82,4 +82,4 @@ COPY orig.c /app
 RUN gcc -O3 -o mystery /app/orig.c -lm
 RUN rm /app/orig.c
 COPY install.sh /app
-RUN bash /app/install.sh
+RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro bash /app/install.sh

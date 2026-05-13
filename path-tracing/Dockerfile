@@ -84,4 +84,4 @@ RUN ./orig
 RUN mv /app/reconstructed.ppm /app/image.ppm
 RUN rm /app/orig.c
 COPY install.sh /app
-RUN bash /app/install.sh
+RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro bash /app/install.sh
