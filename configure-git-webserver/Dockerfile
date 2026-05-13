@@ -13,7 +13,8 @@
 
 # This is a template Dockerfile for a task. You can use it as a starting point to create a new task.
 
-FROM ghcr.io/laude-institute/t-bench/ubuntu-24-04:latest
+ARG TBENCH_UBUNTU_2404_IMAGE=ghcr.io/laude-institute/t-bench/ubuntu-24-04:latest
+FROM ${TBENCH_UBUNTU_2404_IMAGE}
 # Network-friendly evaluation defaults: prefer local caches/mirrors prepared on the host.
 ARG TBENCH_APT_PROXY=
 ARG TBENCH_APT_MIRROR=

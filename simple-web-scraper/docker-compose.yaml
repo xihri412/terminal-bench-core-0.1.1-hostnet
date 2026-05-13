@@ -6,6 +6,8 @@ services:
       args:
         TBENCH_APT_PROXY: ${TBENCH_APT_PROXY:-}
         TBENCH_APT_MIRROR: ${TBENCH_APT_MIRROR:-https://mirrors.tuna.tsinghua.edu.cn}
+        TBENCH_PYTHON_313_IMAGE: ${TBENCH_PYTHON_313_IMAGE:-ghcr.io/laude-institute/t-bench/python-3-13:latest}
+        TBENCH_UBUNTU_2404_IMAGE: ${TBENCH_UBUNTU_2404_IMAGE:-ghcr.io/laude-institute/t-bench/ubuntu-24-04:latest}
       additional_contexts:
         tbench_artifacts: ${TBENCH_ARTIFACTS:-/srv/tbench-cache/artifacts}
         tbench_wheelhouse: ${TBENCH_WHEELHOUSE:-/srv/tbench-cache/wheelhouse}
@@ -34,6 +36,8 @@ services:
       args:
         TBENCH_APT_PROXY: ${TBENCH_APT_PROXY:-}
         TBENCH_APT_MIRROR: ${TBENCH_APT_MIRROR:-https://mirrors.tuna.tsinghua.edu.cn}
+        TBENCH_PYTHON_313_IMAGE: ${TBENCH_PYTHON_313_IMAGE:-ghcr.io/laude-institute/t-bench/python-3-13:latest}
+        TBENCH_UBUNTU_2404_IMAGE: ${TBENCH_UBUNTU_2404_IMAGE:-ghcr.io/laude-institute/t-bench/ubuntu-24-04:latest}
       additional_contexts:
         tbench_artifacts: ${TBENCH_ARTIFACTS:-/srv/tbench-cache/artifacts}
         tbench_wheelhouse: ${TBENCH_WHEELHOUSE:-/srv/tbench-cache/wheelhouse}
