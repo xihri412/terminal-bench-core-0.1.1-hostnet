@@ -5,10 +5,15 @@ services:
       dockerfile: Dockerfile
     image: ${T_BENCH_TASK_DOCKER_CLIENT_IMAGE_NAME}
     container_name: ${T_BENCH_TASK_DOCKER_CLIENT_CONTAINER_NAME}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: [ "sh", "-c", "sleep infinity" ]
     environment:
       - TEST_DIR=${T_BENCH_TEST_DIR}
     volumes:
+      - ${TBENCH_WHEELHOUSE:-/srv/tbench-cache/wheelhouse}:/opt/wheelhouse:ro
+      - ${TBENCH_HF_CACHE:-/srv/tbench-cache/hf}:/opt/hf-cache:ro
+      - ${TBENCH_ARTIFACTS:-/srv/tbench-cache/artifacts}:/opt/tbench-artifacts:ro
       - ${T_BENCH_TASK_LOGS_PATH}:${T_BENCH_CONTAINER_LOGS_PATH}
 
   node1:
@@ -29,6 +34,9 @@ services:
       - 9001:9001
     hostname: node1
     volumes:
+      - ${TBENCH_WHEELHOUSE:-/srv/tbench-cache/wheelhouse}:/opt/wheelhouse:ro
+      - ${TBENCH_HF_CACHE:-/srv/tbench-cache/hf}:/opt/hf-cache:ro
+      - ${TBENCH_ARTIFACTS:-/srv/tbench-cache/artifacts}:/opt/tbench-artifacts:ro
       - /mnt/data1
   node2:
     image: vulhub/minio:2023-02-27T18-10-45Z
@@ -43,6 +51,9 @@ services:
       - http://node3:9000/mnt/data3
     hostname: node2
     volumes:
+      - ${TBENCH_WHEELHOUSE:-/srv/tbench-cache/wheelhouse}:/opt/wheelhouse:ro
+      - ${TBENCH_HF_CACHE:-/srv/tbench-cache/hf}:/opt/hf-cache:ro
+      - ${TBENCH_ARTIFACTS:-/srv/tbench-cache/artifacts}:/opt/tbench-artifacts:ro
       - /mnt/data2
   node3:
     image: vulhub/minio:2023-02-27T18-10-45Z
@@ -57,4 +68,7 @@ services:
       - http://node3:9000/mnt/data3
     hostname: node3
     volumes:
+      - ${TBENCH_WHEELHOUSE:-/srv/tbench-cache/wheelhouse}:/opt/wheelhouse:ro
+      - ${TBENCH_HF_CACHE:-/srv/tbench-cache/hf}:/opt/hf-cache:ro
+      - ${TBENCH_ARTIFACTS:-/srv/tbench-cache/artifacts}:/opt/tbench-artifacts:ro
       - /mnt/data3

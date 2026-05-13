@@ -1,6 +1,6 @@
 git config --global user.email "test@example.com"
 git config --global user.name "Test User"
-cp -a /app/task-deps/personal-site personal-site
+git clone https://github.com/TheMikeMerrill/personal-site.git
 cd personal-site
 git remote rm origin
 git reset --hard d7d3e4b

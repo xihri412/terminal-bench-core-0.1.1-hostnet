@@ -14,7 +14,7 @@
   block: false
   append_enter: true
 
-- command: "sed -i 's/HF_TOKEN_REDACTED/<your-huggingface-token>/Ig' /app/dclm/ray_processing/ray_cluster.yaml"
+- command: "sed -i 's/hf_abcdefghijklmnopqrstuvwxyz123456/<your-huggingface-token>/Ig' /app/dclm/ray_processing/ray_cluster.yaml"
   min_timeout_sec: 0.01
   block: false
   append_enter: true

@@ -3,10 +3,6 @@
   block: true
   append_enter: true
 
-- command: export HF_ENDPOINT=https://hf-mirror.com
-  block: true
-  append_enter: true
-
 - command: python
   block: false
   min_timeout_sec: 0.1
