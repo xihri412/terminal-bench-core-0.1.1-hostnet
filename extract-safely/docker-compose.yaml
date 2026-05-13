@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
       args:
         TBENCH_APT_PROXY: ${TBENCH_APT_PROXY:-}
-        TBENCH_APT_MIRROR: ${TBENCH_APT_MIRROR:-}
+        TBENCH_APT_MIRROR: ${TBENCH_APT_MIRROR:-https://mirrors.tuna.tsinghua.edu.cn}
       additional_contexts:
         tbench_artifacts: ${TBENCH_ARTIFACTS:-/srv/tbench-cache/artifacts}
         tbench_wheelhouse: ${TBENCH_WHEELHOUSE:-/srv/tbench-cache/wheelhouse}
