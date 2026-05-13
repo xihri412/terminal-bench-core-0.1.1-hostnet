@@ -42,7 +42,6 @@ for i in range(num_splits):
     with open(output_file, "w", encoding="utf-8") as f:
         for item in subset:
             try:
-                del item["timestamp"]
                 f.write(json.dumps(item) + "\n")
             except Exception as e:
                 print(f"Error writing item {item}")
