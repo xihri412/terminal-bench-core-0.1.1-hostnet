@@ -47,6 +47,7 @@ RUN apt-get install -y \
 WORKDIR /app
 
 COPY requirements.txt /app/
+COPY task-deps/en_core_web_sm-3.7.1-py3-none-any.whl /tmp/en_core_web_sm-3.7.1-py3-none-any.whl
 RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro \
-    pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
+    pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt /tmp/en_core_web_sm-3.7.1-py3-none-any.whl
 RUN --mount=from=tbench_wheelhouse,src=/,target=/opt/wheelhouse,ro pip install pytest numpy
