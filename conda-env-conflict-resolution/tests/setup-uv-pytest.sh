@@ -6,4 +6,4 @@ if [ "$PWD" = "/" ]; then
     exit 1
 fi
 
-python3 -m pytest --version >/dev/null
+/opt/conda/bin/python -m pytest --version >/dev/null

@@ -1,3 +1,3 @@
 #! /bin/bash
 
-python3 -m pytest "$TEST_DIR/test_outputs.py" -rA
+/opt/conda/bin/python -m pytest "$TEST_DIR/test_outputs.py" -rA
