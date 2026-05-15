@@ -73,6 +73,7 @@ def test_expect():
     actual_output = os.popen("expect -f a.exp").read()
     expected_output = "42"
 
-    assert "42" in actual_output.split("echo $?")[1], (
+    assert "echo $?" in actual_output, f"QEMU did not reach the exit-code check:\n{actual_output}"
+    assert expected_output in actual_output.split("echo $?")[1], (
         f"Expected '{expected_output}' to be in expected.txt"
     )

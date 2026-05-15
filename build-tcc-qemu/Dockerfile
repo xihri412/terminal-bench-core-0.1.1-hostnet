@@ -81,6 +81,7 @@ RUN apt-get install -y build-essential libncurses-dev bison flex libssl-dev libe
 
 # Download and extract the kernel source
 COPY task-deps/linux-6.9.tar.xz ./linux-6.9.tar.xz
+COPY task-deps/busybox-x86_64 /tmp/busybox-x86_64
 RUN tar xf linux-6.9.tar.xz
 RUN cd linux-6.9
 

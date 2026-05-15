@@ -26,7 +26,7 @@ EOF
 
 chmod +x basic-init
 
-wget https://busybox.net/downloads/binaries/1.31.0-defconfig-multiarch-musl/busybox-x86_64
+cp /tmp/busybox-x86_64 busybox-x86_64
 
 cat > initramfs.list << 'EOF'
 # Simple busybox based initramfs
