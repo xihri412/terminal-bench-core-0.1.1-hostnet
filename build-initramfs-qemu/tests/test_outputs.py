@@ -41,6 +41,3 @@ def test_expect():
     assert expected_output in actual_output, (
         f"Expected '{expected_output}' to be in post-agent.txt"
     )
-
-
-test_expect()

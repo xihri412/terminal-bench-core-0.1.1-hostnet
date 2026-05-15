@@ -76,6 +76,3 @@ def test_expect():
     assert "42" in actual_output.split("echo $?")[1], (
         f"Expected '{expected_output}' to be in expected.txt"
     )
-
-
-test_expect()
